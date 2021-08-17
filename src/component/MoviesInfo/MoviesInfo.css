@@ -1,0 +1,18 @@
+.list-movie .movie-info {
+  width: 454px;
+  margin: 34px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.movie-info .ant-card-body {
+  padding: 0;
+}
+
+.movie-info .movie-description {
+  width: 228px;
+  margin: 12px 20px 0 20px;
+}
+
+.movie-info .movie-description .movie-description-element {
+  margin-bottom: 10px;
+}
