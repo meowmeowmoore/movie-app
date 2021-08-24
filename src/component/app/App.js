@@ -1,15 +1,30 @@
-import React from 'react';
-// import { Button } from 'antd';
-import ListMovies from '../ListMovies';
+/* eslint-disable */
+import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
+import TabsView from '../TabsView';
+import PaginationView from '../PaginationView';
 
-const App = () => (
-  <div className="App">
-    <div className="wrapper-view">
-      <ListMovies />
-    </div>
-  </div>
-);
+export default class App extends Component {
+  state = {
+    value: null,
+  };
 
-export default App;
+  valueOfInput = (newValue) => {
+    this.setState({
+      value: newValue,
+    });
+  };
+
+  render() {
+    const { value } = this.state;
+    return (
+      <div className="App">
+        <div className="view-wrapper">
+          <TabsView valueOfInput={this.valueOfInput} value={value} />
+          <PaginationView />
+        </div>
+      </div>
+    );
+  }
+}

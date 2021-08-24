@@ -1,12 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
-.App {
+body {
   background-color: #e5e5e5;
   font-family: 'Inter';
+  min-height: 1000px;
 }
 
-.wrapper-view {
+.App {
   width: 1010px;
+  /*min-height: 1000px;*/
   margin: 0 auto;
   background-color: white;
+}
+
+.App .view-wrapper {
+  max-width: 938px;
+  /*border: 1px solid red;*/
+  margin: 0 auto;
+}
+
+.App .wrapper-panel-of-search {
+  margin-bottom: 35px;
 }
