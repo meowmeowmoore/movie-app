@@ -7,9 +7,7 @@ import './SearchPanel.css';
 
 const SearchPanel = ({ valueOfInput }) => {
   const valueOfInputDebounced = debounce((event) => valueOfInput(event.target.value), 1000);
-  return (
-    <Input placeholder="Type to search..." size="large" className="input-for-movie" onChange={valueOfInputDebounced} />
-  );
+  return <Input placeholder="Type to search..." size="large" onChange={valueOfInputDebounced} />;
 };
 
 export default SearchPanel;

@@ -17,8 +17,9 @@ export default class MovieService {
     return res.json();
   }
 
-  async getMoviesByName(value) {
-    const res = await fetch(`${this.apiSearch}?api_key=${this.apiKey}&query=${value}`);
+  async getMoviesByName(value, page) {
+    const res = await fetch(`${this.apiSearch}?api_key=${this.apiKey}&query=${value}
+                                   &page=${page}`);
     if (!res.ok) {
       throw new Error(`Error in 'movieService', when you do query 
                       ${this.apiBase} received ${res.status}`);
@@ -37,9 +38,9 @@ export default class MovieService {
     };
   }
 
-  async getAllMoviesByName(value) {
-    const resultObj = await this.getMoviesByName(value);
-    return resultObj.results;
+  async getAllMoviesByName(value, page) {
+    const resultObj = await this.getMoviesByName(value, page);
+    return resultObj;
   }
 
   getInfoMovie(movie) {

@@ -2,23 +2,10 @@
 
 body {
   background-color: #e5e5e5;
-  font-family: 'Inter';
+  font-family: 'Inter', serif;
   min-height: 1000px;
 }
 
 .App {
-  width: 1010px;
-  /*min-height: 1000px;*/
-  margin: 0 auto;
   background-color: white;
-}
-
-.App .view-wrapper {
-  max-width: 938px;
-  /*border: 1px solid red;*/
-  margin: 0 auto;
-}
-
-.App .wrapper-panel-of-search {
-  margin-bottom: 35px;
 }

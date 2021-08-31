@@ -1,9 +1,11 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import 'antd/dist/antd.css';
+
 import './App.css';
+import './App-media.css';
+
+import 'antd/dist/antd.css';
 import TabsView from '../TabsView';
-import PaginationView from '../PaginationView';
 
 export default class App extends Component {
   state = {
@@ -22,7 +24,6 @@ export default class App extends Component {
       <div className="App">
         <div className="view-wrapper">
           <TabsView valueOfInput={this.valueOfInput} value={value} />
-          <PaginationView />
         </div>
       </div>
     );

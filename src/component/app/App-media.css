@@ -1,0 +1,41 @@
+@media screen and (min-width: 1200px) {
+  .App,
+  .App .view-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .App,
+  .App .view-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .App,
+  .App .view-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .App,
+  .App .view-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .App {
+    width: 100%;
+  }
+  .App .view-wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

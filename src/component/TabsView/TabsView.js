@@ -6,6 +6,7 @@ import SearchPanel from '../SearchPanel';
 import RatedMovies from '../RatedMovies';
 
 import './TabsView.css';
+import './TabsView-media.css';
 import { Tabs } from 'antd';
 
 const TabsView = ({ valueOfInput, value }) => {

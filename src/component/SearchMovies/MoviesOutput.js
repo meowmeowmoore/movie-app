@@ -3,27 +3,54 @@
 import React, { Component } from 'react';
 import MovieService from '../../services/movieService';
 import ErrorIndicator from '../errorIndicator';
+import MovieView from './MovieView';
 
-import './SearchMovie.css';
-import { Image, Spin, Tag, Typography } from 'antd';
+import './MoviesOutput.css';
+import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { format } from 'date-fns';
 
 export default class MoviesOutput extends Component {
   movieService = new MovieService();
 
   state = {
     movies: [],
-    loading: true,
+    loading: false,
     error: false,
+    currentPage: 1,
+    totalMoviesCount: 0,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { value } = this.props;
+    const { currentPage } = this.state;
     if (value !== null && value !== prevProps.value) {
-      this.updateMovie(value);
+      this.updateMovie(value, currentPage);
+      this.setState({
+        loading: true,
+      });
+    }
+
+    if (value === '' && value !== prevProps.value) {
+      console.log('g');
+      this.setState({
+        movies: [],
+        loading: false,
+        error: false,
+      });
+    }
+
+    if (currentPage !== prevState.currentPage) {
+      this.updateMovie(value, currentPage);
     }
   }
+
+  onChange = (page) => {
+    this.setState((state) => ({
+      currentPage: page,
+    }));
+
+    console.log(this.props.value);
+  };
 
   onloadMovie = (arrayOfMovie) => {
     this.setState({
@@ -39,17 +66,29 @@ export default class MoviesOutput extends Component {
     });
   };
 
-  updateMovie = (value) => {
+  updateMovie = (value, currentPage) => {
     this.movieService
-      .getAllMoviesByName(value)
-      .then((arr) => this.onloadMovie(arr))
+      .getAllMoviesByName(value, currentPage)
+      .then((obj) => {
+        const { results, total_results } = obj;
+        this.onloadMovie(results);
+        this.setState({
+          totalMoviesCount: total_results,
+        });
+      })
       .catch(this.onError);
   };
 
   render() {
-    const { movies, error, loading } = this.state;
-    const hasData = !(loading || error);
-    const content = hasData ? <MovieView movies={movies} /> : null;
+    const { movies, error, loading, currentPage, totalMoviesCount } = this.state;
+    const itemsPerPage = 6;
+
+    const totalPage = Math.ceil(totalMoviesCount / itemsPerPage);
+
+    const hasData = !(loading || error) && movies.length !== 0;
+    const content = hasData ? (
+      <MovieView movies={movies} currentPage={currentPage} onChange={this.onChange} totalPage={totalPage} />
+    ) : null;
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? (
       <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} size="large" />
@@ -63,31 +102,3 @@ export default class MoviesOutput extends Component {
     );
   }
 }
-
-const MovieView = ({ movies }) => {
-  const { Title, Text } = Typography;
-  const movieService = new MovieService();
-
-  const toDisplayMovies = movies.map((movie) => {
-    const movieInfo = movieService.getInfoMovie(movie);
-    const { poster, name, description, date, id } = movieInfo;
-    return (
-      <div key={id} className="movie-info">
-        <Image src={`https://image.tmdb.org/t/p/w200/${poster}`} width={183} preview={false} alt="The way back" />
-        <div className="movie-description">
-          <Title level={5} className="movie-description-element">
-            {name}
-          </Title>
-          <p className="movie-description-element">{format(new Date(date), 'PPP')}</p>
-          <div className="movie-description-element tags">
-            <Tag>Drama</Tag>
-            <Tag>Action</Tag>
-          </div>
-          <Text className="movie-description-element">{description}</Text>
-        </div>
-      </div>
-    );
-  });
-
-  return <div className="movie-item">{toDisplayMovies}</div>;
-};

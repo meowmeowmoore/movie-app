@@ -1,0 +1,12 @@
+@media screen and (min-width: 1200px) {
+  .wrapper-panel-of-search {
+    width: 80%;
+    margin: 0 auto 35px auto;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .wrapper-panel-of-search {
+    width: 100%;
+  }
+}

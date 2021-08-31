@@ -1,3 +1,43 @@
-.input-for-movie {
-  max-width: 936px;
-}
+/*.input-for-movie {*/
+/*  max-width: 936px;*/
+/*}*/
+
+/*@media screen and (min-width: 1200px) {*/
+/*  .input-for-movie {*/
+/*    width: 100%;*/
+/*    margin: 0 auto;*/
+/*    border: 1px solid red;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 1199px) {*/
+/*  .App,*/
+/*  .App .view-wrapper {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 991px) {*/
+/*  .App,*/
+/*  .App .view-wrapper {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 767px) {*/
+/*  .App,*/
+/*  .App .view-wrapper {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/
+
+/*@media screen and (max-width: 575px) {*/
+/*  .App,*/
+/*  .App .view-wrapper {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/
