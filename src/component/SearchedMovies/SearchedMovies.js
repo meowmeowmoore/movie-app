@@ -1,15 +1,16 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MovieService from '../../services/movieService';
 import ErrorIndicator from '../errorIndicator';
-import MovieView from './MovieView';
+import MoviesView from '../MoviesView/MoviesView';
 
 import './MoviesOutput.css';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-export default class MoviesOutput extends Component {
+export default class SearchedMovies extends Component {
   movieService = new MovieService();
 
   state = {
@@ -31,7 +32,6 @@ export default class MoviesOutput extends Component {
     }
 
     if (value === '' && value !== prevProps.value) {
-      console.log('g');
       this.setState({
         movies: [],
         loading: false,
@@ -48,8 +48,6 @@ export default class MoviesOutput extends Component {
     this.setState((state) => ({
       currentPage: page,
     }));
-
-    console.log(this.props.value);
   };
 
   onloadMovie = (arrayOfMovie) => {
@@ -81,18 +79,25 @@ export default class MoviesOutput extends Component {
 
   render() {
     const { movies, error, loading, currentPage, totalMoviesCount } = this.state;
-    const itemsPerPage = 6;
+    const itemsPerPage = 20;
 
     const totalPage = Math.ceil(totalMoviesCount / itemsPerPage);
 
     const hasData = !(loading || error) && movies.length !== 0;
     const content = hasData ? (
-      <MovieView movies={movies} currentPage={currentPage} onChange={this.onChange} totalPage={totalPage} />
+      <MoviesView
+        movies={movies}
+        currentPage={currentPage}
+        onChange={this.onChange}
+        totalMoviesCount={totalMoviesCount}
+        addToListRatedMovies={this.props.addToListRatedMovies}
+      />
     ) : null;
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? (
       <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} size="large" />
     ) : null;
+
     return (
       <div className="list-movie">
         {content}
@@ -102,3 +107,13 @@ export default class MoviesOutput extends Component {
     );
   }
 }
+
+SearchedMovies.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  addToListRatedMovies: PropTypes.func,
+};
+
+SearchedMovies.defaultProps = {
+  value: '',
+  addToListRatedMovies: () => {},
+};

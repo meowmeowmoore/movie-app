@@ -1,7 +1,8 @@
 /* eslint-disable */
 
 import React from 'react';
-import MoviesOutput from '../SearchMovies';
+import PropTypes from 'prop-types';
+import SearchedMovies from '../SearchedMovies';
 import SearchPanel from '../SearchPanel';
 import RatedMovies from '../RatedMovies';
 
@@ -9,7 +10,7 @@ import './TabsView.css';
 import './TabsView-media.css';
 import { Tabs } from 'antd';
 
-const TabsView = ({ valueOfInput, value }) => {
+const TabsView = ({ valueOfInput, value, addToListRatedMovies, ratedMovie, rate }) => {
   const { TabPane } = Tabs;
 
   return (
@@ -20,15 +21,31 @@ const TabsView = ({ valueOfInput, value }) => {
         </div>
 
         <div className="wrapper-list-of-movie">
-          <MoviesOutput value={value} />
+          <SearchedMovies value={value} addToListRatedMovies={addToListRatedMovies} />
         </div>
       </TabPane>
 
       <TabPane tab="Rated" key="2">
-        <RatedMovies />
+        <div className="wrapper-list-of-movie">
+          <RatedMovies ratedMovie={ratedMovie} rate={rate} />
+        </div>
       </TabPane>
     </Tabs>
   );
 };
 
 export default TabsView;
+
+TabsView.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  valueOfInput: PropTypes.func,
+  addToListRatedMovies: PropTypes.func,
+  ratedMovie: PropTypes.object,
+};
+
+TabsView.defaultProps = {
+  value: '',
+  valueOfInput: () => {},
+  addToListRatedMovies: () => {},
+  ratedMovie: {},
+};

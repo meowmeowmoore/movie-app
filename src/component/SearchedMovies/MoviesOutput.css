@@ -1,0 +1,14 @@
+.wrapper-list-of-movie .list-movie {
+  min-height: 800px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.list-movie .wrapper-list-movie {
+  min-height: 750px;
+  width: 100%;
+}
+
+.list-movie .pagination-view ul {
+  text-align: center;
+}

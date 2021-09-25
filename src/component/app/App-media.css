@@ -1,10 +1,12 @@
 @media screen and (min-width: 1200px) {
   .App,
   .App .view-wrapper {
-    width: 80%;
+    width: 1010px;
     margin: 0 auto;
   }
 }
+
+/*1440 - 1010 - ширина белой обл, ширина карточки фильма - 454*/
 
 @media screen and (max-width: 1199px) {
   .App,
